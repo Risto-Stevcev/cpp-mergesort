@@ -18,7 +18,6 @@ class MergeSort
     int& operator[] (const int index);
 
     int& length (void);
-    void swap (int, int);
 
     void merge (int *, int, int *, int, int *);
     void mergesort (void);

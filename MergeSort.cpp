@@ -4,11 +4,13 @@
 
 using namespace std;
 
+
 MergeSort::MergeSort()
 {
     list = new int[0];
     len = 0;
 }
+
 
 MergeSort::MergeSort (const int* t, int length)
 {
@@ -24,10 +26,12 @@ MergeSort::MergeSort (const int* t, int length)
     }
 }
 
+
 MergeSort::~MergeSort()
 {
     delete[] list;
 }
+
 
 ostream& 
 operator<< (ostream& os, const MergeSort& ms)
@@ -42,11 +46,13 @@ operator<< (ostream& os, const MergeSort& ms)
     return os;
 }
 
+
 int& 
 MergeSort::operator[] (const int index)
 {
     return list[index];
 }
+
 
 int& 
 MergeSort::length (void)
@@ -54,12 +60,15 @@ MergeSort::length (void)
     return len;
 }
 
-void print_arr(int *l, int len)
+
+void
+print_arr(int *l, int len)
 {
     for (int i = 0; i < len; i++)
         cout << l[i] << " ";
     cout << endl;
 }
+
 
 void
 MergeSort::merge (int *subarr1, int subarr1_len, 
@@ -76,6 +85,7 @@ MergeSort::merge (int *subarr1, int subarr1_len,
             arr[i] = subarr2[i2++];
     }
 }
+
 
 int *
 MergeSort::_mergesort (int *arr, int arrlen)
@@ -107,13 +117,4 @@ void
 MergeSort::mergesort ()
 {
     _mergesort( list, len );
-}
-
-
-void
-MergeSort::swap (int element1, int element2)
-{
-    int temp = list[element1];
-    list[element1] = list[element2];
-    list[element2] = temp;
 }

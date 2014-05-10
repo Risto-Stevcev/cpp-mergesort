@@ -55,18 +55,6 @@ class TestMergeSort : public CppUnit::TestFixture
     }
 
     void
-    testSwap ()
-    {
-        int first = (*mergesort)[2];
-        int second = (*mergesort)[4];
-
-        mergesort->swap(2, 4);
-
-        CPPUNIT_ASSERT( (*mergesort)[2] == second );
-        CPPUNIT_ASSERT( (*mergesort)[4] == first );
-    }
-
-    void
     testMerge ()
     {
         int left[] = {25260, 29649, 54044};
@@ -103,9 +91,6 @@ class TestMergeSort : public CppUnit::TestFixture
         suiteOfTests->addTest( new CppUnit::TestCaller<TestMergeSort>( 
                                        "testIndex", 
                                        &TestMergeSort::testIndex ) );
-        suiteOfTests->addTest( new CppUnit::TestCaller<TestMergeSort>( 
-                                       "testSwap", 
-                                       &TestMergeSort::testSwap ) );
         suiteOfTests->addTest( new CppUnit::TestCaller<TestMergeSort>( 
                                        "testMerge", 
                                        &TestMergeSort::testMerge ) );
