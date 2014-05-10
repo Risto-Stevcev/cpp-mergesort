@@ -11,18 +11,18 @@ class MergeSort
     public:
 
     MergeSort();
-    MergeSort(const int* list, int length);
+    MergeSort(const int*, int);
     ~MergeSort();
 
-    friend ostream& operator<< (ostream& os, const MergeSort& ms);
+    friend ostream& operator<< (ostream&, const MergeSort&);
     int& operator[] (const int index);
 
     int& length (void);
-    void swap (int element1, int element2);
+    void swap (int, int);
 
-    void merge (int start, int mid, int end);
+    void merge (int *, int, int *, int, int *);
     void mergesort (void);
-    void _mergesort (int start, int end);
+    int *_mergesort (int *, int);
 
 
     private:
@@ -31,5 +31,6 @@ class MergeSort
     int len;
 };
 
-ostream& operator<< (ostream& os, const MergeSort& ms);
+ostream& operator<< (ostream&, const MergeSort&);
+void print_arr(int *, int);
 #endif

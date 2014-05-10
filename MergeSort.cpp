@@ -54,53 +54,59 @@ MergeSort::length (void)
     return len;
 }
 
-void print(int *l, int len)
+void print_arr(int *l, int len)
 {
     for (int i = 0; i < len; i++)
         cout << l[i] << " ";
     cout << endl;
 }
 
-void 
-MergeSort::merge (int start, int mid, int end)
+void
+MergeSort::merge (int *subarr1, int subarr1_len, 
+                  int *subarr2, int subarr2_len, 
+                  int *arr)
 {
-    int sorted[end+1];
-    for (int i = start, left = start, right = mid; (left < mid || right <= end); i++)
-    {
-        if (left < mid && right <= end)
-            sorted[i] = (list[left] <= list[right]) ? list[left++] : list[right++];
-        else if (left < mid)
-            sorted[i] = list[left++];
-        else if (right <= end)
-            sorted[i] = list[right++];
-    } 
-
-    for (int i = start; i <= end; i++)
-        list[i] = sorted[i];
+    for (int i = 0, i1 = 0, i2 = 0; i1 < subarr1_len || i2 < subarr2_len; i++) {
+        if (i1 < subarr1_len && i2 < subarr2_len)
+            arr[i] = 
+                (subarr1[i1] <= subarr2[i2]) ? subarr1[i1++] : subarr2[i2++];
+        else if (i1 < subarr1_len)
+            arr[i] = subarr1[i1++];
+        else if (i2 < subarr2_len)
+            arr[i] = subarr2[i2++];
+    }
 }
 
-
-void
-MergeSort::_mergesort (int start, int end)
+int *
+MergeSort::_mergesort (int *arr, int arrlen)
 {
-    int mid = floor( (end - start)/2 ) + start;
+    if (arrlen <= 1)
+        return arr;
 
-    if (start + 1 == end) {
-        if (list[start] > list[end])
-            swap(start, end); 
-    }
-    if (start < end && start != mid) {
-        _mergesort( start, mid );
-        _mergesort( mid, end );
-        merge( start, mid, end );
-    }
+    int middle = arrlen / 2;
+    int *left = arr;
+    int *right = arr + middle;
+
+    left = _mergesort(left, middle);
+    right = _mergesort(right, arrlen - middle);
+
+    /* copy subarrays into local arrays for merge */
+    int l[middle];
+    int r[arrlen - middle];
+    for (int i = 0; i < middle; i++, left++)
+        l[i] = *left;
+    for (int i = 0; i < arrlen - middle; i++, right++)
+        r[i] = *right;
+
+    merge(l, middle, r, arrlen - middle, arr);
+    return arr;
 }
 
 
 void
 MergeSort::mergesort ()
 {
-    _mergesort( 0, len-1 );
+    _mergesort( list, len );
 }
 
 
